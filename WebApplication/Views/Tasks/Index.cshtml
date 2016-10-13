@@ -1,9 +1,12 @@
 ﻿
 @{
-    ViewBag.Title = "To-Do List";
+    ViewBag.Title = "Rapport";
 }
-
-<h2>To-Do List</h2>
+<div class="jumbotron">
+    <h1>Rapport Api Access</h1>
+    <p class="lead">This page shows Role Based access control to the users. Only an Admin can delete the items, while a Doctor can create and view and Nurse can only view</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
 
 @using (Html.BeginForm("Create", "Tasks", FormMethod.Post))
 {

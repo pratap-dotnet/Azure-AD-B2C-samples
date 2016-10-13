@@ -19,7 +19,7 @@ namespace TaskService.Controllers
         {
             string owner = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
             IEnumerable<Models.Task> userTasks = db.Where(t => t.Owner == owner);
-            return userTasks;
+            return db;
         }
 
         public void Post(Models.Task task)
@@ -37,7 +37,7 @@ namespace TaskService.Controllers
         public void Delete(int id)
         {
             string owner = ClaimsPrincipal.Current.FindFirst("http://schemas.microsoft.com/identity/claims/objectidentifier").Value;
-            Models.Task task = db.Where(t => t.Owner.Equals(owner) && t.Id.Equals(id)).FirstOrDefault();
+            Models.Task task = db.Where(t => t.Id.Equals(id)).FirstOrDefault();
             db.Remove(task);
         }
     }
