@@ -15,5 +15,11 @@ namespace WebApplication.Controllers
             ViewBag.Message = message;
             return View("Error");
         }
+
+        public ActionResult AccessDenied()
+        {
+            ViewBag.Message = "You are unauthorized to perform the action";
+            return View("Error");
+        }
     }
 }

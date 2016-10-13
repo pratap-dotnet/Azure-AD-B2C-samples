@@ -8,7 +8,14 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Hello " + name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            <a id="profile-link">@User.Identity.Name</a>
+            <div id="profile-options" class="nav navbar-nav navbar-right">
+                <ul class="profile-links">
+                    <li class="profile-link">
+                        @Html.ActionLink("Edit Profile", "Profile", "Account")
+                    </li>
+                </ul>
+            </div>
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>

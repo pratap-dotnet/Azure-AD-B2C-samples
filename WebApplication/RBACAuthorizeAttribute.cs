@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace WebApplication
 {
@@ -54,6 +55,19 @@ namespace WebApplication
                 
             }
             return result;
+        }
+
+        protected override void HandleUnauthorizedRequest(System.Web.Mvc.AuthorizationContext filterContext)
+        {
+            if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
+            {
+                base.HandleUnauthorizedRequest(filterContext);
+            }
+            else
+            {
+                filterContext.Result = new RedirectToRouteResult(new
+                RouteValueDictionary(new { controller = "Error", action = "AccessDenied" }));
+            }
         }
 
         private string GetGroupId(string item)

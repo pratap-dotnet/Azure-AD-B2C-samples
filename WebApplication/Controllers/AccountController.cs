@@ -39,5 +39,14 @@ namespace WebApplication.Controllers
                 Request.GetOwinContext().Authentication.GetAuthenticationTypes();
             }
         }
+
+        public void Profile()
+        {
+            if (Request.IsAuthenticated)
+            {
+                HttpContext.GetOwinContext().Authentication.Challenge(
+                       new AuthenticationProperties { RedirectUri = "/" }, Startup.ProfilePolicyId);
+            }
+        }
     }
 }
