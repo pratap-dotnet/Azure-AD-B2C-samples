@@ -28,5 +28,12 @@ namespace WebApplication.Controllers
 
             return View();
         }
+
+        [Authorize]
+        public ActionResult Claims()
+        {
+            ViewBag.Message = "Your application description page.";
+            return View();
+        }
     }
 }

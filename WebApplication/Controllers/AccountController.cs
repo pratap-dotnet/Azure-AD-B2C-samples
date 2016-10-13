@@ -1,14 +1,8 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
@@ -33,6 +27,16 @@ namespace WebApplication.Controllers
             {
                 HttpContext.GetOwinContext().Authentication.Challenge(
                     new AuthenticationProperties { RedirectUri = "/" }, Startup.SignUpPolicyId);
+            }
+        }
+
+        public void LogOff()
+        {
+            if (Request.IsAuthenticated)
+            {
+                IEnumerable<AuthenticationDescription> authTypes = HttpContext.GetOwinContext().Authentication.GetAuthenticationTypes();
+                HttpContext.GetOwinContext().Authentication.SignOut(authTypes.Select(t => t.AuthenticationType).ToArray());
+                Request.GetOwinContext().Authentication.GetAuthenticationTypes();
             }
         }
     }

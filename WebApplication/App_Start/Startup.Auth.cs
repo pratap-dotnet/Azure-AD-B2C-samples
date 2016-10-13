@@ -1,27 +1,16 @@
-﻿using System;
-using System.Configuration;
-using System.Linq;
-using System.IdentityModel.Claims;
+﻿using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Helpers;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.IdentityModel.Protocols;
-using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.Notifications;
 using Microsoft.Owin.Security.OpenIdConnect;
-using Owin;
-using WebApplication.Models;
-using Microsoft.Azure.ActiveDirectory.GraphClient;
 using Newtonsoft.Json.Linq;
+using Owin;
 
 namespace WebApplication
 {
@@ -64,7 +53,7 @@ namespace WebApplication
                     AuthorizationCodeReceived = async (context) =>
                     {
                         var resource_collection = "users";
-                        var resource_id = "9c85662e-645c-4eed-9d8c-5afdc94d687b";
+                        var resource_id = (context.AuthenticationTicket.Identity as ClaimsIdentity).FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier).Value;
 
                         var credential = new ClientCredential("16fe6693-55ec-460d-b3ed-33af78f131e4", "WFQ5YfPYkECZLmX8DPZTdKoHcUdw8B9CV9uYKxOEIBI=");
 
