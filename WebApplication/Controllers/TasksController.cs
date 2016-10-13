@@ -23,7 +23,7 @@ namespace WebApplication.Controllers
             var bootstrapContext = ClaimsPrincipal.Current.Identities.First().BootstrapContext as System.IdentityModel.Tokens.BootstrapContext;
 
             HttpClient client = new HttpClient();
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, ConfigurationManager.AppSettings["webApi"] + "/api/tasks");
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, ConfigurationManager.AppSettings["webApi"] + "api/tasks");
 
             // Add the token acquired from ADAL to the request headers
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", bootstrapContext.Token);

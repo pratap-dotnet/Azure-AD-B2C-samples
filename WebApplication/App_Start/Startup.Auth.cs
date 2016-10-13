@@ -95,7 +95,8 @@ namespace WebApplication
                 //ResponseType = "id_token",
                 TokenValidationParameters = new System.IdentityModel.Tokens.TokenValidationParameters
                 {
-                    NameClaimType = "name"
+                    NameClaimType = "name",
+                    SaveSigninToken = true
                 }
             };
         }
