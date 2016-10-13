@@ -40,13 +40,15 @@ namespace WebApplication.Controllers
             }
         }
 
-        public void Profile()
+        public void EditProfile()
         {
             if (Request.IsAuthenticated)
             {
-                HttpContext.GetOwinContext().Authentication.Challenge(
-                       new AuthenticationProperties { RedirectUri = "/" }, Startup.ProfilePolicyId);
+                HttpContext.GetOwinContext().Authentication.Challenge(new AuthenticationProperties { RedirectUri = "/" },
+                    Startup.ProfilePolicyId);
+                return;
             }
+            Response.Redirect("/");
         }
     }
 }

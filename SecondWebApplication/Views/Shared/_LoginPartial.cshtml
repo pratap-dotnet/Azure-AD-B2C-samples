@@ -3,12 +3,10 @@
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
-        var name = (User.Identity as System.Security.Claims.ClaimsIdentity).Claims.First(a => a.Type == "name").Value;
-        //@Html.AntiForgeryToken()
-
+    
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink(@User.Identity.Name, "EditProfile", "Account", routeValues: null, htmlAttributes: new { id = "profileLink" })
+            @User.Identity.GetUserName()
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
     </ul>
@@ -17,7 +15,6 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "SignUp", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "SignIn", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }
