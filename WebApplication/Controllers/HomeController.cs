@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -33,6 +34,7 @@ namespace WebApplication.Controllers
         public ActionResult Claims()
         {
             ViewBag.Message = "Your application description page.";
+            ViewBag.Jwt = (ClaimsPrincipal.Current.Identities.First().BootstrapContext as System.IdentityModel.Tokens.BootstrapContext).Token;
             return View();
         }
     }
