@@ -18,10 +18,6 @@ namespace WebApplication
     public class RBACAuthorizeAttribute : AuthorizeAttribute
     {
 
-        
-        private static string adminGroupId = ConfigurationManager.AppSettings["adminGroup"];
-        private static string nurseGroupId = ConfigurationManager.AppSettings["nurseGroup"];
-        private static string doctorGroupId = ConfigurationManager.AppSettings["doctorGroup"];
         private readonly string[] groupNames;
         public RBACAuthorizeAttribute(params string[] groupNames)
         {
@@ -41,7 +37,7 @@ namespace WebApplication
                     {
                         foreach (var item in groupNames)
                         {
-                            if (group.Value.Contains(GetGroupId(item)))
+                            if (group.Value.Contains(item))
                             {
                                 result = true;
                                 break;
@@ -68,26 +64,6 @@ namespace WebApplication
                 filterContext.Result = new RedirectToRouteResult(new
                 RouteValueDictionary(new { controller = "Error", action = "AccessDenied" }));
             }
-        }
-
-        private string GetGroupId(string item)
-        {
-            var groupId = string.Empty;
-            switch (item)
-            {
-                case Groups.Admin:
-                    groupId = adminGroupId;
-                    break;
-                case Groups.Doctor:
-                    groupId = doctorGroupId;
-                    break;
-                case Groups.Nurse:
-                    groupId = nurseGroupId;
-                    break;
-                default:
-                    break;
-            }
-            return groupId;
         }
     }
 }
